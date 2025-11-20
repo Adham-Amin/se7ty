@@ -7,10 +7,10 @@ ThemeData themeDark() {
   return ThemeData(
     brightness: Brightness.dark,
     fontFamily: AppStyles.fontFamily,
-    scaffoldBackgroundColor: AppColors.darkBg,
+    scaffoldBackgroundColor: AppColors.dark,
     colorScheme: ColorScheme.dark(
       primary: AppColors.primary,
-      surface: AppColors.darkBg,
+      surface: AppColors.dark,
       secondary: AppColors.grey,
       surfaceTint: Colors.transparent,
     ),

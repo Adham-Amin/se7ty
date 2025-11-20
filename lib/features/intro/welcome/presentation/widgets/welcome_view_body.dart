@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:se7ty/core/utils/app_assets.dart';
 import 'package:se7ty/core/utils/app_colors.dart';
 import 'package:se7ty/core/utils/app_styles.dart';
-import 'package:se7ty/core/widgets/custom_button.dart';
 import 'package:se7ty/core/widgets/height_and_width.dart';
 
 class WelcomeViewBody extends StatelessWidget {
@@ -36,33 +35,30 @@ class WelcomeViewBody extends StatelessWidget {
               ),
               Spacer(flex: 3),
               Container(
-                padding: EdgeInsets.all(24),
+                padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withValues(alpha: 0.6),
-                  borderRadius: BorderRadius.circular(16),
+                  color: AppColors.primary.withValues(alpha: .5),
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withValues(alpha: .3),
+                      blurRadius: 15,
+                      offset: const Offset(5, 5),
+                    ),
+                  ],
                 ),
                 child: Column(
                   children: [
                     Text(
                       'سجل دلوقتي ك',
-                      style: AppStyles.textMedium18.copyWith(
+                      style: AppStyles.textRegular16.copyWith(
                         color: AppColors.white,
                       ),
                     ),
                     HeightBox(32),
-                    CustomButton(
-                      title: 'دكتور',
-                      onTap: () {},
-                      backgroundColor: AppColors.white,
-                      colortext: AppColors.black,
-                    ),
+                    UserButton(title: 'دكتور', onTap: () {}),
                     HeightBox(16),
-                    CustomButton(
-                      title: 'مريض',
-                      onTap: () {},
-                      backgroundColor: AppColors.white,
-                      colortext: AppColors.black,
-                    ),
+                    UserButton(title: 'مريض', onTap: () {}),
                   ],
                 ),
               ),
@@ -71,6 +67,33 @@ class WelcomeViewBody extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class UserButton extends StatelessWidget {
+  const UserButton({super.key, required this.title, required this.onTap});
+
+  final String title;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 70,
+        decoration: BoxDecoration(
+          color: AppColors.accentColor.withValues(alpha: .7),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Center(
+          child: Text(
+            title,
+            style: AppStyles.textBold18.copyWith(color: AppColors.dark),
+          ),
+        ),
+      ),
     );
   }
 }

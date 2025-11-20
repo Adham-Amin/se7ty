@@ -7,8 +7,12 @@ abstract class AppStyles {
     fontSize: 32.sp,
     fontWeight: FontWeight.bold,
   );
-  static TextStyle textBold16 = TextStyle(
-    fontSize: 16.sp,
+  static TextStyle textBold24 = TextStyle(
+    fontSize: 24.sp,
+    fontWeight: FontWeight.bold,
+  );
+  static TextStyle textBold18 = TextStyle(
+    fontSize: 18.sp,
     fontWeight: FontWeight.bold,
   );
   static TextStyle textRegular16 = TextStyle(
@@ -22,17 +26,5 @@ abstract class AppStyles {
   static TextStyle textRegular14 = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeight.w400,
-  );
-  static TextStyle textMedium18 = TextStyle(
-    fontSize: 18.sp,
-    fontWeight: FontWeight.w500,
-  );
-  static TextStyle textMedium16 = TextStyle(
-    fontSize: 16.sp,
-    fontWeight: FontWeight.w500,
-  );
-  static TextStyle textSemiBold24 = TextStyle(
-    fontSize: 24.sp,
-    fontWeight: FontWeight.w600,
   );
 }

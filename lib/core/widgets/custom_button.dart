@@ -27,12 +27,12 @@ class CustomButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: backgroundColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.r),
+            borderRadius: BorderRadius.circular(12.r),
           ),
         ),
         child: Text(
           title,
-          style: AppStyles.textBold16.copyWith(
+          style: AppStyles.textRegular16.copyWith(
             color: colortext ?? AppColors.white,
           ),
         ),

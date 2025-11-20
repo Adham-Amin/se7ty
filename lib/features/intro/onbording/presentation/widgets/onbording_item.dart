@@ -18,7 +18,7 @@ class OnbordingItem extends StatelessWidget {
         SizedBox(height: 24.h),
         Text(
           item.title,
-          style: AppStyles.textSemiBold24.copyWith(color: AppColors.primary),
+          style: AppStyles.textBold18.copyWith(color: AppColors.primary),
         ),
         SizedBox(height: 24.h),
         Text(

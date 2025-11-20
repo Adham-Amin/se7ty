@@ -20,7 +20,7 @@ ThemeData themeLight() {
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: AppColors.bg,
+      fillColor: AppColors.accentColor,
       hintStyle: AppStyles.textRegular16.copyWith(color: AppColors.grey),
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.r)),
       enabledBorder: OutlineInputBorder(
