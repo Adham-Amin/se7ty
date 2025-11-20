@@ -32,6 +32,6 @@ ThemeData themeLight() {
         borderSide: const BorderSide(color: AppColors.primary),
       ),
     ),
-    appBarTheme: AppBarTheme(elevation: 0, backgroundColor: AppColors.white),
+    appBarTheme: AppBarTheme(elevation: 0, backgroundColor: AppColors.primary),
   );
 }

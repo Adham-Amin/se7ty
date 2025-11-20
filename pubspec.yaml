@@ -34,11 +34,14 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  flutter_localizations:
+    sdk: flutter
   flutter_screenutil: ^5.9.3
   flutter_secure_storage: ^9.2.4
   flutter_svg: ^2.2.2
   hive_flutter: ^1.1.0
   shared_preferences: ^2.5.3
+  smooth_page_indicator: ^1.2.1
 
 dev_dependencies:
   flutter_lints: ^5.0.0
@@ -87,3 +90,5 @@ flutter_assets:
   filename: app_assets.dart
   field_prefix: null
   classname: AppAssets
+flutter_intl:
+  enabled: true

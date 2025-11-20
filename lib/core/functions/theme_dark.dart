@@ -32,7 +32,7 @@ ThemeData themeDark() {
         borderSide: const BorderSide(color: AppColors.primary),
       ),
     ),
-    appBarTheme: AppBarTheme(elevation: 0, backgroundColor: AppColors.darkBg),
+    appBarTheme: AppBarTheme(elevation: 0, backgroundColor: AppColors.primary),
     cardColor: const Color(0xFF1E1E1E),
   );
 }
