@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:se7ty/core/utils/app_colors.dart';
+import 'package:se7ty/core/utils/app_styles.dart';
 
 class CustomRichText extends StatelessWidget {
   final String text;
@@ -15,21 +17,14 @@ class CustomRichText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
+    return Text.rich(
+      TextSpan(
         text: text,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: theme.colorScheme.onSurface,
-        ),
+        style: AppStyles.textRegular16,
         children: [
           TextSpan(
             text: ' $linkText',
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.primary,
-              fontWeight: FontWeight.w600,
-            ),
+            style: AppStyles.textRegular16.copyWith(color: AppColors.primary),
             recognizer: TapGestureRecognizer()..onTap = onTap,
           ),
         ],

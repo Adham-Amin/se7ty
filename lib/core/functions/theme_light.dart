@@ -22,13 +22,14 @@ ThemeData themeLight() {
       filled: true,
       fillColor: AppColors.accentColor,
       hintStyle: AppStyles.textRegular16.copyWith(color: AppColors.grey),
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.r)),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(16.r)),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20.r),
-        borderSide: const BorderSide(color: AppColors.grey),
+        borderRadius: BorderRadius.circular(16.r),
+        borderSide: BorderSide.none,
       ),
+      prefixIconColor: AppColors.primary,
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20.r),
+        borderRadius: BorderRadius.circular(16.r),
         borderSide: const BorderSide(color: AppColors.primary),
       ),
     ),

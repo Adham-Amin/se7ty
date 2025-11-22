@@ -30,7 +30,7 @@ class _CustomTextFormFieldPasswordState
       validator: widget.validator,
       style: AppStyles.textRegular14,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.lock, color: AppColors.primary),
+        prefixIcon: Icon(Icons.lock),
         hintText: widget.hintText,
         suffixIcon: IconButton(
           onPressed: () {

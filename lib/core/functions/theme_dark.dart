@@ -22,13 +22,14 @@ ThemeData themeDark() {
       filled: true,
       fillColor: AppColors.darkCard,
       hintStyle: AppStyles.textRegular16.copyWith(color: AppColors.grey),
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.r)),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12.r)),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20.r),
-        borderSide: const BorderSide(color: AppColors.grey),
+        borderRadius: BorderRadius.circular(12.r),
+        borderSide: BorderSide.none,
       ),
+      prefixIconColor: AppColors.primary,
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20.r),
+        borderRadius: BorderRadius.circular(12.r),
         borderSide: const BorderSide(color: AppColors.primary),
       ),
     ),

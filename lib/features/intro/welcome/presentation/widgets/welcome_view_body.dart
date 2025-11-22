@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:se7ty/core/routes/app_routes.dart';
 import 'package:se7ty/core/utils/app_assets.dart';
 import 'package:se7ty/core/utils/app_colors.dart';
 import 'package:se7ty/core/utils/app_styles.dart';
 import 'package:se7ty/core/widgets/height_and_width.dart';
+import 'package:se7ty/features/intro/welcome/data/model/user_type_enum.dart';
 
 class WelcomeViewBody extends StatelessWidget {
   const WelcomeViewBody({super.key});
@@ -56,9 +58,27 @@ class WelcomeViewBody extends StatelessWidget {
                       ),
                     ),
                     HeightBox(32),
-                    UserButton(title: 'دكتور', onTap: () {}),
+                    UserButton(
+                      title: 'دكتور',
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.registerView,
+                          arguments: UserTypeEnum.doctor,
+                        );
+                      },
+                    ),
                     HeightBox(16),
-                    UserButton(title: 'مريض', onTap: () {}),
+                    UserButton(
+                      title: 'مريض',
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.registerView,
+                          arguments: UserTypeEnum.patient,
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
