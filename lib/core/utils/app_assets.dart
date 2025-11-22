@@ -2,6 +2,10 @@
 class AppAssets {
   AppAssets._();
   
+  /// Assets for imagesDocPlacehorder
+  /// assets/images/doc_placehorder.png
+  static const String imagesDocPlacehorder = "assets/images/doc_placehorder.png";
+
   /// Assets for imagesLogo
   /// assets/images/logo.png
   static const String imagesLogo = "assets/images/logo.png";

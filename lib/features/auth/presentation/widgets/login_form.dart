@@ -4,6 +4,7 @@ import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:se7ty/core/routes/app_routes.dart';
 import 'package:se7ty/core/utils/app_styles.dart';
 import 'package:se7ty/core/widgets/custom_button.dart';
 import 'package:se7ty/core/widgets/custom_snack_bar.dart';
@@ -93,16 +94,16 @@ class _LoginFormState extends State<LoginForm> {
                 log(state.user.userType.toString());
                 Navigator.pop(context);
                 if (state.user.userType == UserTypeEnum.patient.name) {
-                  customSnackBar(
-                    context: context,
-                    message: 'تم انشاء الحساب مريض',
-                    type: AnimatedSnackBarType.success,
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRoutes.mainView,
+                    (_) => false,
                   );
                 } else if (state.user.userType == UserTypeEnum.doctor.name) {
-                  customSnackBar(
-                    context: context,
-                    message: 'تم انشاء الحساب دكتور',
-                    type: AnimatedSnackBarType.success,
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRoutes.doctorRegisterView,
+                    (_) => false,
                   );
                 }
               }

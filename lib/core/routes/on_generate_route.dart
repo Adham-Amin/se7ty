@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:se7ty/core/routes/app_routes.dart';
+import 'package:se7ty/features/auth/presentation/views/doctor_registeration_screen.dart';
 import 'package:se7ty/features/auth/presentation/views/login_view.dart';
 import 'package:se7ty/features/auth/presentation/views/register_view.dart';
 import 'package:se7ty/features/intro/onbording/presentation/views/onbording_view.dart';
@@ -17,14 +18,14 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case AppRoutes.welcomeView:
       return MaterialPageRoute(builder: (_) => const WelcomeView());
     case AppRoutes.loginView:
-      return MaterialPageRoute(
-        builder: (_) => LoginView(userType: settings.arguments as UserTypeEnum),
-      );
+      return MaterialPageRoute(builder: (_) => LoginView());
     case AppRoutes.registerView:
       return MaterialPageRoute(
         builder: (_) =>
             RegisterView(userType: settings.arguments as UserTypeEnum),
       );
+    case AppRoutes.doctorRegisterView:
+      return MaterialPageRoute(builder: (_) => const DoctorRegisterView());
     case AppRoutes.mainView:
       return MaterialPageRoute(builder: (_) => const MainView());
     default:

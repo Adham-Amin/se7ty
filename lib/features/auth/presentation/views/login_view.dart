@@ -7,12 +7,9 @@ import 'package:se7ty/features/auth/data/data_source/auth_remote_data_source.dar
 import 'package:se7ty/features/auth/data/repo/auth_repo_impl.dart';
 import 'package:se7ty/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:se7ty/features/auth/presentation/widgets/login_view_body.dart';
-import 'package:se7ty/features/intro/welcome/data/model/user_type_enum.dart';
 
 class LoginView extends StatelessWidget {
-  const LoginView({super.key, required this.userType});
-
-  final UserTypeEnum userType;
+  const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +27,7 @@ class LoginView extends StatelessWidget {
           backgroundColor: isDark ? AppColors.black : AppColors.white,
           title: Text('تسجيل دخول', style: AppStyles.textBold18),
         ),
-        body: LoginViewBody(userType: userType),
+        body: LoginViewBody(),
       ),
     );
   }

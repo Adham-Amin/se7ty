@@ -16,4 +16,6 @@ abstract class AuthRepo {
   });
 
   Future<Either<String, void>> forgetPassword({required String email});
+
+  Future<Either<String, void>> saveUserData({required UserTypeEnum userType});
 }

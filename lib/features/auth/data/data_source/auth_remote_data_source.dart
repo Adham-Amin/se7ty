@@ -1,4 +1,6 @@
 import 'package:se7ty/core/services/firebase_service.dart';
+import 'package:se7ty/features/auth/data/model/doctor_model.dart';
+import 'package:se7ty/features/auth/data/model/patient_model.dart';
 import 'package:se7ty/features/auth/domain/entities/user_entity.dart';
 import 'package:se7ty/features/intro/welcome/data/model/user_type_enum.dart';
 
@@ -12,6 +14,8 @@ abstract class AuthRemoteDataSource {
   });
 
   Future<void> forgetPassword({required String email});
+
+  Future<void> saveUserData({required UserTypeEnum userType});
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -67,5 +71,32 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> forgetPassword({required String email}) async {
     await firebaseService.auth.sendPasswordResetEmail(email: email);
+  }
+
+  @override
+  Future<void> saveUserData({required UserTypeEnum userType}) async {
+    if (userType == UserTypeEnum.doctor) {
+      final doctor = DoctorModel(
+        uid: firebaseService.auth.currentUser!.uid,
+        name: firebaseService.auth.currentUser!.displayName,
+        email: firebaseService.auth.currentUser!.email,
+        image: firebaseService.auth.currentUser!.photoURL,
+      );
+      await firebaseService.firestore
+          .collection('doctors')
+          .doc(firebaseService.auth.currentUser!.uid)
+          .set(doctor.toJson());
+    } else {
+      final patient = PatientModel(
+        uid: firebaseService.auth.currentUser!.uid,
+        name: firebaseService.auth.currentUser!.displayName,
+        email: firebaseService.auth.currentUser!.email,
+        image: firebaseService.auth.currentUser!.photoURL,
+      );
+      await firebaseService.firestore
+          .collection('patients')
+          .doc(firebaseService.auth.currentUser!.uid)
+          .set(patient.toJson());
+    }
   }
 }

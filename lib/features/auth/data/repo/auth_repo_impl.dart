@@ -47,6 +47,7 @@ class AuthRepoImpl extends AuthRepo {
         password: password,
         userType: userType,
       );
+      saveUserData(userType: userType);
       return right(user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -71,6 +72,18 @@ class AuthRepoImpl extends AuthRepo {
         return left('البريد الإلكتروني غير مسجل');
       }
       return left(e.message ?? e.toString());
+    } catch (e) {
+      return left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, void>> saveUserData({
+    required UserTypeEnum userType,
+  }) async {
+    try {
+      await authRemoteDataSource.saveUserData(userType: userType);
+      return right(null);
     } catch (e) {
       return left(e.toString());
     }
