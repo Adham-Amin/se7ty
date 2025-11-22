@@ -10,6 +10,10 @@ class AppAssets {
   /// assets/images/welcome_bg.png
   static const String imagesWelcomeBg = "assets/images/welcome_bg.png";
 
+  /// Assets for lottieLoading
+  /// assets/lottie/loading.json
+  static const String lottieLoading = "assets/lottie/loading.json";
+
   /// Assets for svgsOnOne
   /// assets/svgs/on_one.svg
   static const String svgsOnOne = "assets/svgs/on_one.svg";

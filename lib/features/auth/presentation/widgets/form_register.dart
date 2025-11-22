@@ -1,11 +1,19 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:se7ty/core/widgets/custom_button.dart';
+import 'package:se7ty/core/widgets/custom_snack_bar.dart';
 import 'package:se7ty/core/widgets/custom_text_form_field.dart';
 import 'package:se7ty/core/widgets/custom_text_form_field_password.dart';
+import 'package:se7ty/core/widgets/loading_dialog.dart';
+import 'package:se7ty/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:se7ty/features/intro/welcome/data/model/user_type_enum.dart';
 
 class FormRegister extends StatefulWidget {
-  const FormRegister({super.key});
+  const FormRegister({super.key, required this.userType});
+
+  final UserTypeEnum userType;
 
   @override
   State<FormRegister> createState() => _FormRegisterState();
@@ -82,13 +90,50 @@ class _FormRegisterState extends State<FormRegister> {
             },
           ),
           SizedBox(height: 32.h),
-          CustomButton(
-            onTap: () {
-              if (formKey.currentState!.validate()) {
-                formKey.currentState!.save();
+          BlocListener<AuthCubit, AuthState>(
+            listener: (context, state) {
+              if (state is AuthLoaded) {
+                Navigator.pop(context);
+                if (state.user.userType == UserTypeEnum.patient.name) {
+                  customSnackBar(
+                    context: context,
+                    message: 'تم انشاء الحساب مريض',
+                    type: AnimatedSnackBarType.success,
+                  );
+                } else if (state.user.userType == UserTypeEnum.doctor.name) {
+                  customSnackBar(
+                    context: context,
+                    message: 'تم انشاء الحساب دكتور',
+                    type: AnimatedSnackBarType.success,
+                  );
+                }
+              }
+              if (state is AuthError) {
+                Navigator.pop(context);
+                customSnackBar(
+                  context: context,
+                  message: state.message,
+                  type: AnimatedSnackBarType.error,
+                );
+              }
+              if (state is AuthLoading) {
+                loadingDialog(context);
               }
             },
-            title: "انشاء حساب جديد",
+            child: CustomButton(
+              onTap: () {
+                if (formKey.currentState!.validate()) {
+                  formKey.currentState!.save();
+                  context.read<AuthCubit>().register(
+                    name: userNameController.text,
+                    email: emailController.text,
+                    password: passwordController.text,
+                    userType: widget.userType,
+                  );
+                }
+              },
+              title: "انشاء حساب جديد",
+            ),
           ),
         ],
       ),

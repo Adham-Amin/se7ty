@@ -35,7 +35,7 @@ class RegisterViewBody extends StatelessWidget {
             style: AppStyles.textBold18.copyWith(color: AppColors.primary),
           ),
           const SizedBox(height: 30),
-          FormRegister(),
+          FormRegister(userType: userType),
           SizedBox(height: 32.h),
           CustomRichText(
             text: 'لدي حساب ؟',

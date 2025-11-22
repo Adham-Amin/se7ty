@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:se7ty/features/auth/domain/entities/user_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Prefs {
@@ -8,14 +10,14 @@ class Prefs {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  // static Future<void> setUser(UserEntity user) async {
-  //   await _prefs?.setString('user', jsonEncode(user.toJson()));
-  // }
+  static Future<void> setUser(UserEntity user) async {
+    await _prefs?.setString('user', jsonEncode(user.toJson()));
+  }
 
-  // static UserEntity? getUser() {
-  //   final user = _prefs?.getString('user');
-  //   return user != null ? UserEntity.fromJson(jsonDecode(user)) : null;
-  // }
+  static UserEntity? getUser() {
+    final user = _prefs?.getString('user');
+    return user != null ? UserEntity.fromJson(jsonDecode(user)) : null;
+  }
 
   static Future<void> clearUserData() async {
     await _prefs?.remove('user');
