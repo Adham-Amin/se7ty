@@ -63,6 +63,7 @@ class DoctorModel {
 
   Map<String, dynamic> toUpdateData() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    if (uid != null) data['uid'] = uid;
     if (name != null) data['name'] = name;
     if (image != null) data['image'] = image;
     if (specialization != null) data['specialization'] = specialization;

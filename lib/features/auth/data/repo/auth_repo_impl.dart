@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:se7ty/features/auth/data/data_source/auth_remote_data_source.dart';
+import 'package:se7ty/features/auth/data/model/doctor_model.dart';
 import 'package:se7ty/features/auth/domain/entities/user_entity.dart';
 import 'package:se7ty/features/auth/domain/repo/auth_repo.dart';
 import 'package:se7ty/features/intro/welcome/data/model/user_type_enum.dart';
@@ -83,6 +86,19 @@ class AuthRepoImpl extends AuthRepo {
   }) async {
     try {
       await authRemoteDataSource.saveUserData(userType: userType);
+      return right(null);
+    } catch (e) {
+      return left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, void>> doctorRegister({
+    required DoctorModel doctor,
+    required File image,
+  }) async {
+    try {
+      await authRemoteDataSource.doctorRegister(doctor: doctor, image: image);
       return right(null);
     } catch (e) {
       return left(e.toString());

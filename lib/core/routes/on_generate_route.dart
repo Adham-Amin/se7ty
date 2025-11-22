@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:se7ty/core/routes/app_routes.dart';
-import 'package:se7ty/features/auth/presentation/views/doctor_registeration_screen.dart';
+import 'package:se7ty/features/auth/presentation/views/doctor_registeration_view.dart';
 import 'package:se7ty/features/auth/presentation/views/login_view.dart';
 import 'package:se7ty/features/auth/presentation/views/register_view.dart';
 import 'package:se7ty/features/intro/onbording/presentation/views/onbording_view.dart';

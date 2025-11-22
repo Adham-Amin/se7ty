@@ -24,3 +24,5 @@ final class AuthForgetPasswordError extends AuthState {
   final String message;
   AuthForgetPasswordError({required this.message});
 }
+
+final class AuthDoctorLoaded extends AuthState {}

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:se7ty/core/functions/image_uploader.dart';
 import 'package:se7ty/core/services/firebase_service.dart';
 import 'package:se7ty/features/auth/data/model/doctor_model.dart';
 import 'package:se7ty/features/auth/data/model/patient_model.dart';
@@ -16,6 +19,10 @@ abstract class AuthRemoteDataSource {
   Future<void> forgetPassword({required String email});
 
   Future<void> saveUserData({required UserTypeEnum userType});
+  Future<void> doctorRegister({
+    required DoctorModel doctor,
+    required File image,
+  });
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -80,7 +87,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         uid: firebaseService.auth.currentUser!.uid,
         name: firebaseService.auth.currentUser!.displayName,
         email: firebaseService.auth.currentUser!.email,
-        image: firebaseService.auth.currentUser!.photoURL,
       );
       await firebaseService.firestore
           .collection('doctors')
@@ -91,12 +97,34 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         uid: firebaseService.auth.currentUser!.uid,
         name: firebaseService.auth.currentUser!.displayName,
         email: firebaseService.auth.currentUser!.email,
-        image: firebaseService.auth.currentUser!.photoURL,
       );
       await firebaseService.firestore
           .collection('patients')
           .doc(firebaseService.auth.currentUser!.uid)
           .set(patient.toJson());
     }
+  }
+
+  @override
+  Future<void> doctorRegister({
+    required DoctorModel doctor,
+    required File image,
+  }) async {
+    var imageUrl = await uploadImageToCloudinary(image);
+    var doctorData = DoctorModel(
+      image: imageUrl,
+      specialization: doctor.specialization,
+      rating: doctor.rating,
+      phone1: doctor.phone1,
+      phone2: doctor.phone2,
+      bio: doctor.bio,
+      openHour: doctor.openHour,
+      closeHour: doctor.closeHour,
+      address: doctor.address,
+    );
+    await firebaseService.firestore
+        .collection('doctors')
+        .doc(firebaseService.auth.currentUser!.uid)
+        .update(doctorData.toUpdateData());
   }
 }

@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
+import 'package:se7ty/features/auth/data/model/doctor_model.dart';
 import 'package:se7ty/features/auth/domain/entities/user_entity.dart';
 import 'package:se7ty/features/intro/welcome/data/model/user_type_enum.dart';
 
@@ -18,4 +21,8 @@ abstract class AuthRepo {
   Future<Either<String, void>> forgetPassword({required String email});
 
   Future<Either<String, void>> saveUserData({required UserTypeEnum userType});
+  Future<Either<String, void>> doctorRegister({
+    required DoctorModel doctor,
+    required File image,
+  });
 }

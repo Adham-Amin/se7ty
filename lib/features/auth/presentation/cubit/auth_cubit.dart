@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:se7ty/features/auth/data/model/doctor_model.dart';
 import 'package:se7ty/features/auth/domain/entities/user_entity.dart';
 import 'package:se7ty/features/auth/domain/repo/auth_repo.dart';
 import 'package:se7ty/features/intro/welcome/data/model/user_type_enum.dart';
@@ -44,6 +47,18 @@ class AuthCubit extends Cubit<AuthState> {
     result.fold(
       (l) => emit(AuthForgetPasswordError(message: l)),
       (r) => emit(AuthForgetPasswordLoaded()),
+    );
+  }
+
+  Future<void> doctorRegister({
+    required DoctorModel doctor,
+    required File image,
+  }) async {
+    emit(AuthLoading());
+    final result = await authRepo.doctorRegister(doctor: doctor, image: image);
+    result.fold(
+      (l) => emit(AuthError(message: l)),
+      (r) => emit(AuthDoctorLoaded()),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:se7ty/core/routes/app_routes.dart';
 import 'package:se7ty/core/widgets/custom_button.dart';
 import 'package:se7ty/core/widgets/custom_snack_bar.dart';
 import 'package:se7ty/core/widgets/custom_text_form_field.dart';
@@ -101,6 +102,11 @@ class _FormRegisterState extends State<FormRegister> {
                     type: AnimatedSnackBarType.success,
                   );
                 } else if (state.user.userType == UserTypeEnum.doctor.name) {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRoutes.doctorRegisterView,
+                    (_) => false,
+                  );
                   customSnackBar(
                     context: context,
                     message: 'تم انشاء الحساب دكتور',

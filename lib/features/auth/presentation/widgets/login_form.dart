@@ -102,7 +102,7 @@ class _LoginFormState extends State<LoginForm> {
                 } else if (state.user.userType == UserTypeEnum.doctor.name) {
                   Navigator.pushNamedAndRemoveUntil(
                     context,
-                    AppRoutes.doctorRegisterView,
+                    AppRoutes.mainView,
                     (_) => false,
                   );
                 }
