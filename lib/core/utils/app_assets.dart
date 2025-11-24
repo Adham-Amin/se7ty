@@ -18,6 +18,10 @@ class AppAssets {
   /// assets/lottie/loading.json
   static const String lottieLoading = "assets/lottie/loading.json";
 
+  /// Assets for svgsDoctorCard
+  /// assets/svgs/doctor-card.svg
+  static const String svgsDoctorCard = "assets/svgs/doctor-card.svg";
+
   /// Assets for svgsOnOne
   /// assets/svgs/on_one.svg
   static const String svgsOnOne = "assets/svgs/on_one.svg";

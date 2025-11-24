@@ -7,7 +7,7 @@ import 'package:se7ty/features/intro/onbording/presentation/views/onbording_view
 import 'package:se7ty/features/intro/splash/presentation/views/splash_view.dart';
 import 'package:se7ty/features/intro/welcome/data/model/user_type_enum.dart';
 import 'package:se7ty/features/intro/welcome/presentation/views/welcome_view.dart';
-import 'package:se7ty/features/main/main_view.dart';
+import 'package:se7ty/features/patient/main/nav_bar.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -26,9 +26,9 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       );
     case AppRoutes.doctorRegisterView:
       return MaterialPageRoute(builder: (_) => const DoctorRegisterView());
-    case AppRoutes.mainView:
-      return MaterialPageRoute(builder: (_) => const MainView());
+    case AppRoutes.patientMainView:
+      return MaterialPageRoute(builder: (_) => const PatientMainView());
     default:
-      return MaterialPageRoute(builder: (_) => const Scaffold());
+      return MaterialPageRoute(builder: (_) => const WelcomeView());
   }
 }

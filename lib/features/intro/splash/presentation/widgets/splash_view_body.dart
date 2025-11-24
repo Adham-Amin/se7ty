@@ -1,5 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:se7ty/core/routes/app_routes.dart';
@@ -17,13 +17,27 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   @override
   initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
-      if (Prefs.getBool('SeenOn') == true) {
-        Navigator.pushReplacementNamed(context, AppRoutes.welcomeView);
+    Future.delayed(const Duration(seconds: 3), checkNavigation);
+  }
+
+  void checkNavigation() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final role = user.photoURL ?? "";
+      if (role == 'patient') {
+        Navigator.pushReplacementNamed(context, AppRoutes.patientMainView);
       } else {
         Navigator.pushReplacementNamed(context, AppRoutes.onbordingView);
       }
-    });
+      return;
+    }
+
+    final seen = Prefs.getBool('SeenOn');
+    if (seen) {
+      Navigator.pushReplacementNamed(context, AppRoutes.welcomeView);
+    } else {
+      Navigator.pushReplacementNamed(context, AppRoutes.onbordingView);
+    }
   }
 
   @override

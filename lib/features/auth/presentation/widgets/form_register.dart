@@ -96,10 +96,10 @@ class _FormRegisterState extends State<FormRegister> {
               if (state is AuthLoaded) {
                 Navigator.pop(context);
                 if (state.user.userType == UserTypeEnum.patient.name) {
-                  customSnackBar(
-                    context: context,
-                    message: 'تم انشاء الحساب مريض',
-                    type: AnimatedSnackBarType.success,
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRoutes.patientMainView,
+                    (_) => false,
                   );
                 } else if (state.user.userType == UserTypeEnum.doctor.name) {
                   Navigator.pushNamedAndRemoveUntil(

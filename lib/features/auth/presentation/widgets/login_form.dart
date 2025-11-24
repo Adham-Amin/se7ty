@@ -96,15 +96,15 @@ class _LoginFormState extends State<LoginForm> {
                 if (state.user.userType == UserTypeEnum.patient.name) {
                   Navigator.pushNamedAndRemoveUntil(
                     context,
-                    AppRoutes.mainView,
+                    AppRoutes.patientMainView,
                     (_) => false,
                   );
                 } else if (state.user.userType == UserTypeEnum.doctor.name) {
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    AppRoutes.mainView,
-                    (_) => false,
-                  );
+                  // Navigator.pushNamedAndRemoveUntil(
+                  //   context,
+                  //   AppRoutes.doctorMainView,
+                  //   (_) => false,
+                  // );
                 }
               }
               if (state is AuthError) {
