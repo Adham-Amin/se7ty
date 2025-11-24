@@ -33,7 +33,7 @@ class Se7ty extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
-        themeMode: ThemeMode.light,
+        themeMode: ThemeMode.dark,
         theme: themeLight(),
         darkTheme: themeDark(),
         debugShowCheckedModeBanner: false,

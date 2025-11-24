@@ -8,21 +8,22 @@ class PatientHomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
             splashRadius: 20,
-            icon: const Icon(Icons.notifications_active, color: AppColors.dark),
+            icon: Icon(
+              Icons.notifications_active,
+              color: isDark ? Colors.white : AppColors.dark,
+            ),
             onPressed: () {},
           ),
         ],
-        backgroundColor: Colors.white,
+        backgroundColor: isDark ? AppColors.dark : Colors.white,
         centerTitle: true,
-        title: Text(
-          'صــــــحّـتــي',
-          style: AppStyles.textBold18.copyWith(color: AppColors.dark),
-        ),
+        title: Text('صــــــحّـتــي', style: AppStyles.textBold18),
       ),
       body: PatientHomeViewBody(),
     );

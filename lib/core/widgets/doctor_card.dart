@@ -39,7 +39,6 @@ class DoctorCard extends StatelessWidget {
                 width: 55.w,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: AppColors.white,
                 ),
                 child: Image.network(
                   doctor.image ?? '',
@@ -65,7 +64,9 @@ class DoctorCard extends StatelessWidget {
                   ),
                   Text(
                     doctor.specialization ?? '',
-                    style: AppStyles.textBold16,
+                    style: AppStyles.textBold16.copyWith(
+                      color: AppColors.black,
+                    ),
                   ),
                 ],
               ),
@@ -74,7 +75,10 @@ class DoctorCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(doctor.rating.toString(), style: AppStyles.textBold16),
+                Text(
+                  doctor.rating.toString(),
+                  style: AppStyles.textBold16.copyWith(color: AppColors.black),
+                ),
                 const SizedBox(width: 3),
                 const Icon(
                   Icons.star_rate_rounded,

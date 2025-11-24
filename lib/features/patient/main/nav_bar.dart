@@ -33,12 +33,13 @@ class _MainPageState extends State<PatientMainView> {
 
   @override
   Widget build(BuildContext context) {
+    var isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: Container(
         padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: isDark ? AppColors.dark : Colors.white,
           borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
           boxShadow: [
             BoxShadow(
