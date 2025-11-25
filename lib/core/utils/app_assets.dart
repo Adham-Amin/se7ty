@@ -22,6 +22,14 @@ class AppAssets {
   /// assets/svgs/doctor-card.svg
   static const String svgsDoctorCard = "assets/svgs/doctor-card.svg";
 
+  /// Assets for svgsNoScheduled
+  /// assets/svgs/no_scheduled.svg
+  static const String svgsNoScheduled = "assets/svgs/no_scheduled.svg";
+
+  /// Assets for svgsNoSearch
+  /// assets/svgs/no-search.svg
+  static const String svgsNoSearch = "assets/svgs/no-search.svg";
+
   /// Assets for svgsOnOne
   /// assets/svgs/on_one.svg
   static const String svgsOnOne = "assets/svgs/on_one.svg";
