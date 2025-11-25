@@ -25,7 +25,7 @@ class TopRatedSection extends StatelessWidget {
           builder: (context, state) {
             if (state is HomeLoaded) {
               if (state.doctors.isEmpty) {
-                return EmptyDoctors(message: 'القسم');
+                return EmptyDoctors(text: 'القسم');
               }
               return ListView.separated(
                 shrinkWrap: true,

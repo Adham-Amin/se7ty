@@ -1,11 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:se7ty/core/functions/theme_dark.dart';
 import 'package:se7ty/core/functions/theme_light.dart';
 import 'package:se7ty/core/routes/app_routes.dart';
 import 'package:se7ty/core/routes/on_generate_route.dart';
+import 'package:se7ty/core/services/custom_observer_bloc.dart';
 import 'package:se7ty/core/services/shared_preferences_service.dart';
 import 'package:se7ty/firebase_options.dart';
 
@@ -13,6 +15,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Prefs.init();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  Bloc.observer = CustomObserverBloc();
   runApp(const Se7ty());
 }
 

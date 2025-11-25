@@ -5,25 +5,24 @@ import 'package:se7ty/core/utils/app_assets.dart';
 import 'package:se7ty/core/utils/app_styles.dart';
 
 class EmptyDoctors extends StatelessWidget {
-  const EmptyDoctors({super.key, required this.message});
+  const EmptyDoctors({super.key, this.text, this.message});
 
-  final String message;
+  final String? text;
+  final String? message;
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset(AppAssets.svgsNoSearch, width: 250.w),
-            Text(
-              'لا يوجد دكتور بهذا $message حاليا',
-              style: AppStyles.textBold18,
-            ),
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(AppAssets.svgsNoSearch, width: 250.w),
+          Text(
+            message ?? 'لا يوجد دكتور بهذا $text حاليا',
+            style: AppStyles.textBold18,
+          ),
+        ],
       ),
     );
   }

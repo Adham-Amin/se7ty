@@ -20,7 +20,7 @@ class SpecialityViewBody extends StatelessWidget {
         builder: (context, state) {
           if (state is HomeLoaded) {
             if (state.doctors.isEmpty) {
-              return EmptyDoctors(message: 'التخصص');
+              return EmptyDoctors(text: 'التخصص');
             }
             return ListView.separated(
               itemCount: state.doctors.length,

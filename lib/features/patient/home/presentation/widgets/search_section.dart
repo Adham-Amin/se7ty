@@ -33,8 +33,9 @@ class SearchSection extends StatelessWidget {
       ),
       child: CustomTextFormField(
         onTap: onTap,
+        onChanged: onChange,
         readOnly: readOnly ?? false,
-        hintText: 'ابحث عن دكتور',
+        hintText: notDisplaySuffix ? 'ادخل الاسم' : 'ابحث عن دكتور',
         suffixIcon: notDisplaySuffix
             ? null
             : Container(
