@@ -6,4 +6,5 @@ abstract class AppRoutes {
   static const String registerView = '/registerView';
   static const String patientMainView = '/mainView';
   static const String doctorRegisterView = '/doctorRegisterView';
+  static const String specialityView = '/specialityView';
 }

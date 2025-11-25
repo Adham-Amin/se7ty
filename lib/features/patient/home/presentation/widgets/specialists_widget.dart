@@ -25,7 +25,8 @@ class SpecialistsBanner extends StatelessWidget {
               return GestureDetector(
                 onTap: () {},
                 child: SpecialistCard(
-                  model: SpecializationCardModel.specializationsCard[index],
+                  speciality:
+                      SpecializationCardModel.specializationsCard[index],
                 ),
               );
             },
