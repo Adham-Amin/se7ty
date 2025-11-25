@@ -28,7 +28,9 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case AppRoutes.doctorRegisterView:
       return MaterialPageRoute(builder: (_) => const DoctorRegisterView());
     case AppRoutes.patientMainView:
-      return MaterialPageRoute(builder: (_) => const PatientMainView());
+      return MaterialPageRoute(
+        builder: (_) => PatientMainView(key: PatientMainView.mainViewKey),
+      );
     case AppRoutes.specialityView:
       return MaterialPageRoute(
         builder: (_) =>

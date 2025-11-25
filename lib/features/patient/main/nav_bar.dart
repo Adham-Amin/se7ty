@@ -5,6 +5,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:se7ty/core/utils/app_colors.dart';
 import 'package:se7ty/core/utils/app_styles.dart';
 import 'package:se7ty/features/patient/home/presentation/page/patient_home_view.dart';
+import 'package:se7ty/features/patient/search/presentation/page/search_view.dart';
 
 class PatientMainView extends StatefulWidget {
   const PatientMainView({super.key});
@@ -19,8 +20,8 @@ class _MainPageState extends State<PatientMainView> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    const PatientHomeView(),
-    // const SearchScreen(),
+    PatientHomeView(),
+    PatientSearchView(),
     // const MyAppointmentsScreen(),
     // PatientProfileScreen(),
   ];

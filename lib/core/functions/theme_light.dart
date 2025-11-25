@@ -33,6 +33,10 @@ ThemeData themeLight() {
         borderSide: const BorderSide(color: AppColors.primary),
       ),
     ),
-    appBarTheme: AppBarTheme(elevation: 0, backgroundColor: AppColors.primary),
+    appBarTheme: AppBarTheme(
+      elevation: 0,
+      centerTitle: true,
+      backgroundColor: AppColors.primary,
+    ),
   );
 }

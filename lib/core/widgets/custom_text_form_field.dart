@@ -41,7 +41,7 @@ class CustomTextFormField extends StatelessWidget {
       controller: controller,
       validator: validator,
       keyboardType: keyboardType,
-      style: AppStyles.textRegular14,
+      style: AppStyles.textRegular16,
       textAlign: textAlign,
       maxLines: maxLines,
       inputFormatters: inputFormatters,

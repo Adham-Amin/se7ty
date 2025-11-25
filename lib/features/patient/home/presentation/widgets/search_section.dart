@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:se7ty/core/utils/app_colors.dart';
-import 'package:se7ty/core/utils/app_styles.dart';
+import 'package:se7ty/core/widgets/custom_text_form_field.dart';
 
 class SearchSection extends StatelessWidget {
-  const SearchSection({super.key});
+  const SearchSection({
+    super.key,
+    this.readOnly,
+    this.onTap,
+    this.onChange,
+    this.notDisplaySuffix = true,
+  });
+
+  final bool? readOnly;
+  final VoidCallback? onTap;
+  final Function(String)? onChange;
+  final bool notDisplaySuffix;
 
   @override
   Widget build(BuildContext context) {
@@ -20,30 +31,26 @@ class SearchSection extends StatelessWidget {
           ),
         ],
       ),
-      child: TextFormField(
-        textInputAction: TextInputAction.search,
-        cursorColor: AppColors.primary,
-        onTapOutside: (_) => FocusScope.of(context).unfocus(),
-        decoration: InputDecoration(
-          hintStyle: AppStyles.textRegular16,
-          filled: true,
-          hintText: 'ابحث عن دكتور',
-          suffixIcon: Container(
-            decoration: BoxDecoration(
-              color: AppColors.primary.withValues(alpha: 0.9),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: IconButton(
-              iconSize: 20,
-              splashRadius: 20,
-              color: Colors.white,
-              icon: const Icon(Icons.search),
-              onPressed: () {},
-            ),
-          ),
-        ),
-        style: AppStyles.textRegular16,
-        onFieldSubmitted: (String value) {},
+      child: CustomTextFormField(
+        onTap: onTap,
+        readOnly: readOnly ?? false,
+        hintText: 'ابحث عن دكتور',
+        suffixIcon: notDisplaySuffix
+            ? null
+            : Container(
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withValues(alpha: 0.9),
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                child: IconButton(
+                  iconSize: 20,
+                  splashRadius: 20,
+                  color: Colors.white,
+                  icon: const Icon(Icons.search),
+                  onPressed: null,
+                ),
+              ),
       ),
     );
   }
