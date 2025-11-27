@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:se7ty/core/utils/app_colors.dart';
 import 'package:se7ty/core/utils/app_styles.dart';
 import 'package:se7ty/core/widgets/custom_button.dart';
 import 'package:se7ty/core/widgets/height_and_width.dart';
 import 'package:se7ty/features/patient/appointments/data/model/appointments_model.dart';
+import 'package:se7ty/features/patient/appointments/presentation/cubit/appointments_cubit.dart';
 
 class AppointmentExpandedContent extends StatelessWidget {
   const AppointmentExpandedContent({super.key, required this.model});
@@ -42,7 +44,7 @@ class AppointmentExpandedContent extends StatelessWidget {
             onTap: () {
               showDialog(
                 context: context,
-                builder: (context) => AlertDialog.adaptive(
+                builder: (dialogContext) => AlertDialog.adaptive(
                   title: Text("حذف الحجز", style: AppStyles.textBold18),
                   content: Text(
                     "هل متأكد من حذف هذا الحجز؟",
@@ -51,11 +53,16 @@ class AppointmentExpandedContent extends StatelessWidget {
                   actions: [
                     TextButton(
                       child: Text("لا", style: AppStyles.textRegular12),
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () => Navigator.pop(dialogContext),
                     ),
                     TextButton(
                       child: Text("نعم", style: AppStyles.textRegular12),
-                      onPressed: () {},
+                      onPressed: () {
+                        context.read<AppointmentsCubit>().deleteAppointment(
+                          appointmentId: model.id!,
+                        );
+                        Navigator.pop(dialogContext);
+                      },
                     ),
                   ],
                 ),

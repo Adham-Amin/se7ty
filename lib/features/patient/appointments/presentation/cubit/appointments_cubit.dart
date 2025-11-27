@@ -19,9 +19,11 @@ class AppointmentsCubit extends Cubit<AppointmentsState> {
     );
   }
 
-  Future<void> deleteAppointment() async {
+  Future<void> deleteAppointment({required String appointmentId}) async {
     emit(AppointmentsLoading());
-    final result = await appointmentsRepo.deleteAppointment();
+    final result = await appointmentsRepo.deleteAppointment(
+      appointmentId: appointmentId,
+    );
     result.fold((error) => emit(AppointmentsError(message: error)), (_) async {
       await getAppointments();
     });

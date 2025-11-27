@@ -1,4 +1,5 @@
 class AppointmentModel {
+  final String? id;
   final String patientID;
   final String doctorID;
   final String name;
@@ -11,6 +12,7 @@ class AppointmentModel {
   final double rating;
 
   AppointmentModel({
+    this.id,
     required this.patientID,
     required this.doctorID,
     required this.name,
@@ -23,8 +25,9 @@ class AppointmentModel {
     required this.rating,
   });
 
-  factory AppointmentModel.fromJson(Map<String, dynamic> json) {
+  factory AppointmentModel.fromJson(Map<String, dynamic> json, String id) {
     return AppointmentModel(
+      id: id,
       patientID: json['patientID'],
       doctorID: json['doctorID'],
       name: json['name'],

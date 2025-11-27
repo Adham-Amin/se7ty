@@ -3,7 +3,7 @@ import 'package:se7ty/features/patient/appointments/data/model/appointments_mode
 
 abstract class AppointmentsRemoteDataSource {
   Future<List<AppointmentModel>> getAppointments();
-  Future<void> deleteAppointment();
+  Future<void> deleteAppointment({required String appointmentId});
 }
 
 class AppointmentsRemoteDataSourceImpl implements AppointmentsRemoteDataSource {
@@ -11,11 +11,10 @@ class AppointmentsRemoteDataSourceImpl implements AppointmentsRemoteDataSource {
   AppointmentsRemoteDataSourceImpl({required this.firebaseService});
 
   @override
-  Future<void> deleteAppointment() async {
-    final user = firebaseService.auth.currentUser!;
+  Future<void> deleteAppointment({required String appointmentId}) async {
     await firebaseService.firestore
         .collection('appointments')
-        .doc(user.uid)
+        .doc(appointmentId)
         .delete();
   }
 
@@ -25,12 +24,12 @@ class AppointmentsRemoteDataSourceImpl implements AppointmentsRemoteDataSource {
     var snapshot = await firebaseService.firestore
         .collection('appointments')
         .orderBy('date')
-        .where('patientId', isEqualTo: user.uid)
+        .where('patientID', isEqualTo: user.uid)
         .get();
 
     List<AppointmentModel> appointments = [];
     for (var doc in snapshot.docs) {
-      appointments.add(AppointmentModel.fromJson(doc.data()));
+      appointments.add(AppointmentModel.fromJson(doc.data(), doc.id));
     }
 
     return appointments;
