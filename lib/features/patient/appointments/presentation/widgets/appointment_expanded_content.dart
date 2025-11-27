@@ -20,7 +20,7 @@ class AppointmentExpandedContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'اسم المريض:  ${model.name}',
+            'اسم المريض: ${model.name}',
             style: AppStyles.textRegular14.copyWith(color: AppColors.black),
           ),
           HeightBox(12),
@@ -39,38 +39,45 @@ class AppointmentExpandedContent extends StatelessWidget {
             ],
           ),
           HeightBox(12),
-          CustomButton(
-            title: "حذف الحجز",
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (dialogContext) => AlertDialog.adaptive(
-                  title: Text("حذف الحجز", style: AppStyles.textBold18),
-                  content: Text(
-                    "هل متأكد من حذف هذا الحجز؟",
-                    style: AppStyles.textRegular16,
+          model.isComplete == false
+              ? CustomButton(
+                  title: "حذف الحجز",
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (dialogContext) => AlertDialog.adaptive(
+                        title: Text("حذف الحجز", style: AppStyles.textBold18),
+                        content: Text(
+                          "هل متأكد من حذف هذا الحجز؟",
+                          style: AppStyles.textRegular16,
+                        ),
+                        actions: [
+                          TextButton(
+                            child: Text("لا", style: AppStyles.textRegular12),
+                            onPressed: () => Navigator.pop(dialogContext),
+                          ),
+                          TextButton(
+                            child: Text("نعم", style: AppStyles.textRegular12),
+                            onPressed: () {
+                              context
+                                  .read<AppointmentsCubit>()
+                                  .deleteAppointment(appointmentId: model.id!);
+                              Navigator.pop(dialogContext);
+                            },
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  backgroundColor: Colors.red,
+                  colortext: Colors.white,
+                )
+              : Text(
+                  'تمت الموافقة على الحجز',
+                  style: AppStyles.textRegular14.copyWith(
+                    color: AppColors.primary,
                   ),
-                  actions: [
-                    TextButton(
-                      child: Text("لا", style: AppStyles.textRegular12),
-                      onPressed: () => Navigator.pop(dialogContext),
-                    ),
-                    TextButton(
-                      child: Text("نعم", style: AppStyles.textRegular12),
-                      onPressed: () {
-                        context.read<AppointmentsCubit>().deleteAppointment(
-                          appointmentId: model.id!,
-                        );
-                        Navigator.pop(dialogContext);
-                      },
-                    ),
-                  ],
                 ),
-              );
-            },
-            backgroundColor: Colors.red,
-            colortext: Colors.white,
-          ),
         ],
       ),
     );

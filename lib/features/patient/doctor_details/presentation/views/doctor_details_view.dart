@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:se7ty/core/routes/app_routes.dart';
 import 'package:se7ty/core/utils/app_styles.dart';
 import 'package:se7ty/core/widgets/custom_button.dart';
 import 'package:se7ty/features/auth/data/model/doctor_model.dart';
@@ -19,7 +20,16 @@ class DoctorDetailsView extends StatelessWidget {
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12),
-          child: CustomButton(title: 'احجز موعد الان', onTap: () {}),
+          child: CustomButton(
+            title: 'احجز موعد الان',
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                AppRoutes.bookingView,
+                arguments: doctor,
+              );
+            },
+          ),
         ),
       ),
     );

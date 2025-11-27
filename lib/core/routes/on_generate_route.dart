@@ -8,6 +8,7 @@ import 'package:se7ty/features/intro/onbording/presentation/views/onbording_view
 import 'package:se7ty/features/intro/splash/presentation/views/splash_view.dart';
 import 'package:se7ty/features/intro/welcome/data/model/user_type_enum.dart';
 import 'package:se7ty/features/intro/welcome/presentation/views/welcome_view.dart';
+import 'package:se7ty/features/patient/booking/presentation/views/booking_view.dart';
 import 'package:se7ty/features/patient/doctor_details/presentation/views/doctor_details_view.dart';
 import 'package:se7ty/features/patient/home/presentation/page/speciality_view.dart';
 import 'package:se7ty/features/patient/main/nav_bar.dart';
@@ -46,7 +47,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case AppRoutes.bookingView:
       return MaterialPageRoute(
         builder: (_) =>
-            DoctorDetailsView(doctor: settings.arguments as DoctorModel),
+            BookingView(doctorModel: settings.arguments as DoctorModel),
       );
     default:
       return MaterialPageRoute(builder: (_) => const WelcomeView());
