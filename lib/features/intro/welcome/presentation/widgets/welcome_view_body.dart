@@ -104,7 +104,7 @@ class UserButton extends StatelessWidget {
       child: Container(
         height: 70,
         decoration: BoxDecoration(
-          color: AppColors.accentColor.withValues(alpha: .7),
+          color: AppColors.accent.withValues(alpha: .7),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Center(

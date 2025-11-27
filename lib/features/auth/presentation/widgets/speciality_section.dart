@@ -18,7 +18,7 @@ class SpecialitySection extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           decoration: BoxDecoration(
-            color: AppColors.accentColor,
+            color: AppColors.accent,
             borderRadius: BorderRadius.circular(20),
           ),
           child: DropdownButton<String?>(

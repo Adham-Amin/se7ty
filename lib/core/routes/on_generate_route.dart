@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:se7ty/core/routes/app_routes.dart';
+import 'package:se7ty/features/auth/data/model/doctor_model.dart';
 import 'package:se7ty/features/auth/presentation/views/doctor_registeration_view.dart';
 import 'package:se7ty/features/auth/presentation/views/login_view.dart';
 import 'package:se7ty/features/auth/presentation/views/register_view.dart';
@@ -7,6 +8,7 @@ import 'package:se7ty/features/intro/onbording/presentation/views/onbording_view
 import 'package:se7ty/features/intro/splash/presentation/views/splash_view.dart';
 import 'package:se7ty/features/intro/welcome/data/model/user_type_enum.dart';
 import 'package:se7ty/features/intro/welcome/presentation/views/welcome_view.dart';
+import 'package:se7ty/features/patient/doctor_details/presentation/views/doctor_details_view.dart';
 import 'package:se7ty/features/patient/home/presentation/page/speciality_view.dart';
 import 'package:se7ty/features/patient/main/nav_bar.dart';
 
@@ -35,6 +37,16 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (_) =>
             SpecialityView(specialityName: settings.arguments as String),
+      );
+    case AppRoutes.doctorDetailsView:
+      return MaterialPageRoute(
+        builder: (_) =>
+            DoctorDetailsView(doctor: settings.arguments as DoctorModel),
+      );
+    case AppRoutes.bookingView:
+      return MaterialPageRoute(
+        builder: (_) =>
+            DoctorDetailsView(doctor: settings.arguments as DoctorModel),
       );
     default:
       return MaterialPageRoute(builder: (_) => const WelcomeView());

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:se7ty/core/routes/app_routes.dart';
 import 'package:se7ty/core/utils/app_colors.dart';
 import 'package:se7ty/core/utils/app_styles.dart';
 import 'package:se7ty/core/widgets/height_and_width.dart';
@@ -13,7 +14,13 @@ class DoctorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          AppRoutes.doctorDetailsView,
+          arguments: doctor,
+        );
+      },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         width: double.infinity,
