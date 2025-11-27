@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:se7ty/core/utils/app_colors.dart';
 import 'package:se7ty/core/utils/app_styles.dart';
 import 'package:se7ty/core/widgets/height_and_width.dart';
-import 'package:se7ty/features/patient/appointments/presentation/data/model/appointments_model.dart';
+import 'package:se7ty/features/patient/appointments/data/model/appointments_model.dart';
 
 class AppointmentSubtitle extends StatelessWidget {
   const AppointmentSubtitle({super.key, required this.model});

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:se7ty/features/patient/appointments/presentation/data/model/appointments_model.dart';
-import 'package:se7ty/features/patient/appointments/presentation/widgets/appointment_card.dart';
+import 'package:se7ty/features/patient/appointments/presentation/cubit/appointments_cubit.dart';
 import 'package:se7ty/features/patient/appointments/presentation/widgets/appointments_list.dart';
+import 'package:se7ty/features/patient/appointments/presentation/widgets/empty_appointments.dart';
+import 'package:se7ty/features/patient/appointments/presentation/widgets/loading_appointments.dart';
 
 class PatientAppointmentsViewBody extends StatelessWidget {
   const PatientAppointmentsViewBody({super.key});
@@ -11,23 +13,17 @@ class PatientAppointmentsViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 24.h),
-      child: AppointmentsList(
-        appointments: [
-          AppointmentCard(
-            model: AppointmentModel(
-              date: DateTime(2025, 11, 27),
-              description: 'دكتور حب',
-              doctorID: '892928',
-              doctorName: 'ادهم امين',
-              isComplete: false,
-              location: 'مغاغة المنيا',
-              name: 'يوسف علي',
-              patientID: '57',
-              phone: '01013970933',
-              rating: 4,
-            ),
-          ),
-        ],
+      child: BlocBuilder<AppointmentsCubit, AppointmentsState>(
+        builder: (context, state) {
+          if (state is AppointmentsLoaded) {
+            if (state.appointments.isEmpty) {
+              return EmptyAppointments();
+            }
+            return AppointmentsList(appointments: state.appointments);
+          } else {
+            return LoadingAppointments();
+          }
+        },
       ),
     );
   }
