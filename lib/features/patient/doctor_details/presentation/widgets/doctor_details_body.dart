@@ -21,7 +21,7 @@ class DoctorDetailsBody extends StatelessWidget {
           children: [
             DoctorHeaderSection(doctorModel: doctorModel),
             HeightBox(24),
-            DoctorBioSection(bio: doctorModel.bio ?? ''),
+            BioSection(bio: doctorModel.bio ?? ''),
             HeightBox(24),
             DoctorInfoTileSection(
               address: doctorModel.address ?? '',

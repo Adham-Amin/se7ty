@@ -6,6 +6,7 @@ import 'package:se7ty/core/utils/app_colors.dart';
 import 'package:se7ty/core/utils/app_styles.dart';
 import 'package:se7ty/features/patient/appointments/presentation/views/appointments_view.dart';
 import 'package:se7ty/features/patient/home/presentation/page/patient_home_view.dart';
+import 'package:se7ty/features/patient/profile/presentation/views/profile_view.dart';
 import 'package:se7ty/features/patient/search/presentation/page/search_view.dart';
 
 class PatientMainView extends StatefulWidget {
@@ -24,7 +25,7 @@ class _MainPageState extends State<PatientMainView> {
     PatientHomeView(),
     PatientSearchView(),
     PatientAppointmentsView(),
-    // PatientProfileScreen(),
+    PatientProfileView(),
   ];
 
   void changeTab(int index) {

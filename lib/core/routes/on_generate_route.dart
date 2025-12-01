@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:se7ty/core/routes/app_routes.dart';
 import 'package:se7ty/features/auth/data/model/doctor_model.dart';
 import 'package:se7ty/features/auth/presentation/views/doctor_registeration_view.dart';
@@ -12,6 +13,8 @@ import 'package:se7ty/features/patient/booking/presentation/views/booking_view.d
 import 'package:se7ty/features/patient/doctor_details/presentation/views/doctor_details_view.dart';
 import 'package:se7ty/features/patient/home/presentation/page/speciality_view.dart';
 import 'package:se7ty/features/patient/main/nav_bar.dart';
+import 'package:se7ty/features/patient/profile/presentation/cubit/profile_cubit.dart';
+import 'package:se7ty/features/patient/profile/presentation/views/edit_profile_view.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -48,6 +51,12 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (_) =>
             BookingView(doctorModel: settings.arguments as DoctorModel),
+      );
+    case AppRoutes.editProfileView:
+      final cubit = settings.arguments as ProfileCubit;
+      return MaterialPageRoute(
+        builder: (_) =>
+            BlocProvider.value(value: cubit, child: EditProfileView()),
       );
     default:
       return MaterialPageRoute(builder: (_) => const WelcomeView());
