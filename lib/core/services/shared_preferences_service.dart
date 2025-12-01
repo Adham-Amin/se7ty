@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:se7ty/features/auth/domain/entities/user_entity.dart';
+import 'package:se7ty/features/auth/data/model/patient_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Prefs {
@@ -10,13 +10,13 @@ class Prefs {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  static Future<void> setUser(UserEntity user) async {
-    await _prefs?.setString('user', jsonEncode(user.toJson()));
+  static Future<void> setUser(PatientModel patient) async {
+    await _prefs?.setString('user', jsonEncode(patient.toJson()));
   }
 
-  static UserEntity? getUser() {
+  static PatientModel? getUser() {
     final user = _prefs?.getString('user');
-    return user != null ? UserEntity.fromJson(jsonDecode(user)) : null;
+    return user != null ? PatientModel.fromJson(jsonDecode(user)) : null;
   }
 
   static Future<void> clearUserData() async {

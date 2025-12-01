@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:se7ty/core/services/shared_preferences_service.dart';
 import 'package:se7ty/features/auth/data/model/patient_model.dart';
 import 'package:se7ty/features/patient/profile/data/data_source/profile_remote_data_source.dart';
 import 'package:se7ty/features/patient/profile/data/repo/profile_repo.dart';
@@ -23,6 +24,7 @@ class ProfileRepoImpl implements ProfileRepo {
   Future<Either<String, PatientModel>> getProfile() async {
     try {
       final patient = await profileRemoteDataSource.getUserData();
+      Prefs.setUser(patient);
       return right(patient);
     } catch (e) {
       return left(e.toString());
