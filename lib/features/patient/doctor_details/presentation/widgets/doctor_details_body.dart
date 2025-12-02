@@ -25,8 +25,8 @@ class DoctorDetailsBody extends StatelessWidget {
             HeightBox(24),
             DoctorInfoTileSection(
               address: doctorModel.address ?? '',
-              open: doctorModel.openHour ?? '',
-              close: doctorModel.closeHour ?? '',
+              open: doctorModel.openHour?.split(':')[0] ?? '',
+              close: doctorModel.closeHour?.split(':')[0] ?? '',
             ),
             Divider(height: 48),
             DoctorContactSection(doctorModel: doctorModel),
