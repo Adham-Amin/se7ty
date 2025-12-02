@@ -6,9 +6,12 @@ import 'package:se7ty/core/utils/app_colors.dart';
 import 'package:se7ty/core/utils/app_styles.dart';
 import 'package:se7ty/core/widgets/custom_rich_text.dart';
 import 'package:se7ty/features/auth/presentation/widgets/login_form.dart';
+import 'package:se7ty/features/intro/welcome/data/model/user_type_enum.dart';
 
 class LoginViewBody extends StatelessWidget {
-  const LoginViewBody({super.key});
+  const LoginViewBody({super.key, required this.userType});
+
+  final UserTypeEnum userType;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,11 @@ class LoginViewBody extends StatelessWidget {
               text: 'ليس لدي حساب ؟',
               linkText: 'سجل الان',
               onTap: () {
-                Navigator.pushReplacementNamed(context, AppRoutes.registerView);
+                Navigator.pushReplacementNamed(
+                  context,
+                  AppRoutes.registerView,
+                  arguments: userType,
+                );
               },
             ),
             SizedBox(height: 32.h),

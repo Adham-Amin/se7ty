@@ -11,9 +11,13 @@ class ProfileRepoImpl implements ProfileRepo {
   @override
   Future<Either<String, void>> changePassword({
     required String newPassword,
+    required String oldPassword,
   }) async {
     try {
-      await profileRemoteDataSource.changePassword(newPassword: newPassword);
+      await profileRemoteDataSource.changePassword(
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+      );
       return right(null);
     } catch (e) {
       return left(e.toString());

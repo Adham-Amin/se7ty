@@ -16,9 +16,4 @@ final class DocProfileError extends DocProfileState {
   DocProfileError({required this.message});
 }
 
-final class DocProfileAppointments extends DocProfileState {
-  final List<AppointmentModel> appointments;
-  DocProfileAppointments({required this.appointments});
-}
-
 final class DocProfileChangePassword extends DocProfileState {}

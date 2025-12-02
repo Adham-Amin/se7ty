@@ -15,5 +15,3 @@ final class ProfileError extends ProfileState {
   final String message;
   ProfileError({required this.message});
 }
-
-final class ProfileChangePassword extends ProfileState {}

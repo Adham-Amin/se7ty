@@ -56,7 +56,7 @@ class LoadingProfile extends StatelessWidget {
           Divider(height: 48.h),
           Text("معلومات الاتصال", style: AppStyles.textBold16),
           HeightBox(12),
-          PatientContactSSection(patient: patient),
+          PatientContactSSection(email: patient.email, phone: patient.phone),
         ],
       ),
     );

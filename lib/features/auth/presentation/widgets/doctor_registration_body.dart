@@ -3,6 +3,7 @@ import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
+import 'package:se7ty/core/routes/app_routes.dart';
 import 'package:se7ty/core/widgets/custom_button.dart';
 import 'package:se7ty/core/widgets/custom_snack_bar.dart';
 import 'package:se7ty/core/widgets/loading_dialog.dart';
@@ -101,10 +102,10 @@ class _DoctorRegisterViewBodyState extends State<DoctorRegisterViewBody> {
               listener: (context, state) {
                 if (state is AuthDoctorLoaded) {
                   Navigator.pop(context);
-                  customSnackBar(
-                    context: context,
-                    message: 'تم تحديث الحساب بنجاح',
-                    type: AnimatedSnackBarType.success,
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRoutes.docProfileView,
+                    (route) => false,
                   );
                 }
                 if (state is AuthError) {

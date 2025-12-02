@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:se7ty/core/utils/app_colors.dart';
 import 'package:se7ty/core/widgets/height_and_width.dart';
-import 'package:se7ty/features/auth/data/model/patient_model.dart';
 import 'package:se7ty/features/patient/doctor_details/presentation/widgets/tile_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PatientContactSSection extends StatelessWidget {
-  const PatientContactSSection({super.key, required this.patient});
+  const PatientContactSSection({
+    super.key,
+    this.email,
+    this.phone,
+    this.phone2,
+  });
 
-  final PatientModel patient;
+  final String? email;
+  final String? phone;
+  final String? phone2;
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +28,25 @@ class PatientContactSSection extends StatelessWidget {
         children: [
           TileWidget(
             onTap: () {
-              launchUrl(Uri.parse('mailto:${patient.email}'));
+              launchUrl(Uri.parse('mailto:$email'));
             },
-            text: patient.email ?? 'لم تضاف',
+            text: email ?? 'لم تضاف',
             icon: Icons.email,
           ),
           HeightBox(16),
           TileWidget(
-            onTap: () => launchUrl(Uri.parse('tel:${patient.phone}')),
-            text: patient.phone ?? 'لم تضاف',
+            onTap: () => launchUrl(Uri.parse('tel:$phone')),
+            text: phone ?? 'لم تضاف',
             icon: Icons.call,
           ),
+          if (phone2 != null) ...[
+            HeightBox(16),
+            TileWidget(
+              onTap: () => launchUrl(Uri.parse('tel:$phone2')),
+              text: phone2 ?? 'لم تضاف',
+              icon: Icons.call,
+            ),
+          ],
         ],
       ),
     );

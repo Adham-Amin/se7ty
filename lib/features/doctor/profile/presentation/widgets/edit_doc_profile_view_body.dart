@@ -7,52 +7,40 @@ import 'package:se7ty/core/services/shared_preferences_service.dart';
 import 'package:se7ty/core/utils/app_colors.dart';
 import 'package:se7ty/core/widgets/custom_button.dart';
 import 'package:se7ty/core/widgets/height_and_width.dart';
-import 'package:se7ty/features/auth/data/model/patient_model.dart';
-import 'package:se7ty/features/patient/profile/presentation/cubit/change_pass_cubit.dart';
-import 'package:se7ty/features/patient/profile/presentation/cubit/profile_cubit.dart';
+import 'package:se7ty/features/auth/data/model/doctor_model.dart';
+import 'package:se7ty/features/doctor/profile/presentation/manager/doc_profile_cubit/doc_profile_cubit.dart';
 import 'package:se7ty/features/patient/profile/presentation/widgets/edit_item.dart';
 import 'package:se7ty/features/patient/profile/presentation/widgets/loading_edit_profile.dart';
 import 'package:se7ty/features/patient/profile/presentation/widgets/open_edit_dialog.dart';
 
-class EditProfileViewBody extends StatefulWidget {
-  const EditProfileViewBody({super.key});
+class EditDocProfileViewBody extends StatefulWidget {
+  const EditDocProfileViewBody({super.key});
 
   @override
-  State<EditProfileViewBody> createState() => _EditProfileViewBodyState();
+  State<EditDocProfileViewBody> createState() => _EditDocProfileViewBodyState();
 }
 
-class _EditProfileViewBodyState extends State<EditProfileViewBody> {
-  late PatientModel patient;
+class _EditDocProfileViewBodyState extends State<EditDocProfileViewBody> {
+  late DoctorModel doctor;
 
-  final formKey = GlobalKey<FormState>();
-  late TextEditingController passController, newPassController;
   @override
   void initState() {
     super.initState();
-    patient = Prefs.getUser()!;
-    passController = TextEditingController();
-    newPassController = TextEditingController();
+    doctor = Prefs.getDoctor()!;
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    passController.dispose();
-    newPassController.dispose();
-  }
-
-  void _updateProfile(PatientModel newData) {
-    context.read<ProfileCubit>().updateProfile(patient: newData);
+  void _updateProfile(DoctorModel newData) {
+    context.read<DocProfileCubit>().updateProfile(doctor: newData);
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
-      child: BlocBuilder<ProfileCubit, ProfileState>(
+      child: BlocBuilder<DocProfileCubit, DocProfileState>(
         builder: (context, state) {
-          if (state is ProfileLoaded) {
-            final p = state.patient;
+          if (state is DocProfileLoaded) {
+            final d = state.doctor;
             return Column(
               children: [
                 Expanded(
@@ -62,13 +50,13 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                         HeightBox(24),
                         EditItem(
                           title: 'الاسم',
-                          value: p.name ?? 'لم يضاف',
+                          value: d.name ?? 'لم يضاف',
                           onTap: () {
                             openEditDialog(
                               title: 'تعديل الاسم',
-                              initialValue: p.name ?? '',
+                              initialValue: d.name ?? '',
                               onSave: (newValue) {
-                                _updateProfile(PatientModel(name: newValue));
+                                _updateProfile(DoctorModel(name: newValue));
                               },
                               context: context,
                             );
@@ -77,14 +65,30 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                         HeightBox(16),
                         EditItem(
                           title: 'رقم الهاتف',
-                          value: p.phone ?? 'لم يضاف',
+                          value: d.phone1 ?? 'لم يضاف',
                           onTap: () {
                             openEditDialog(
                               title: 'تعديل رقم الهاتف',
-                              initialValue: p.phone ?? '',
+                              initialValue: d.phone1 ?? '',
                               keyboardType: TextInputType.phone,
                               onSave: (newValue) {
-                                _updateProfile(PatientModel(phone: newValue));
+                                _updateProfile(DoctorModel(phone1: newValue));
+                              },
+                              context: context,
+                            );
+                          },
+                        ),
+                        HeightBox(16),
+                        EditItem(
+                          title: 'رقم الهاتف الثاني',
+                          value: d.phone2 ?? 'لم يضاف',
+                          onTap: () {
+                            openEditDialog(
+                              title: 'تعديل رقم الهاتف الثاني',
+                              initialValue: d.phone2 ?? '',
+                              keyboardType: TextInputType.phone,
+                              onSave: (newValue) {
+                                _updateProfile(DoctorModel(phone2: newValue));
                               },
                               context: context,
                             );
@@ -93,13 +97,13 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                         HeightBox(16),
                         EditItem(
                           title: 'المدينة',
-                          value: p.city ?? 'لم يضاف',
+                          value: d.address ?? 'لم يضاف',
                           onTap: () {
                             openEditDialog(
                               title: 'تعديل المدينة',
-                              initialValue: p.city ?? '',
+                              initialValue: d.address ?? '',
                               onSave: (newValue) {
-                                _updateProfile(PatientModel(city: newValue));
+                                _updateProfile(DoctorModel(address: newValue));
                               },
                               context: context,
                             );
@@ -108,13 +112,13 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                         HeightBox(16),
                         EditItem(
                           title: 'نبذة تعريفية',
-                          value: p.bio ?? 'لم يضاف',
+                          value: d.bio ?? 'لم يضاف',
                           onTap: () {
                             openEditDialog(
                               title: 'تعديل النبذة التعريفية',
-                              initialValue: p.bio ?? '',
+                              initialValue: d.bio ?? '',
                               onSave: (newValue) {
-                                _updateProfile(PatientModel(bio: newValue));
+                                _updateProfile(DoctorModel(bio: newValue));
                               },
                               maxLines: 5,
                               context: context,
@@ -122,42 +126,6 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                           },
                         ),
                         HeightBox(16),
-                        EditItem(
-                          title: 'العمر',
-                          value: p.age?.toString() ?? 'لم يضاف',
-                          onTap: () {
-                            openEditDialog(
-                              title: 'تعديل العمر',
-                              initialValue: p.age?.toString() ?? '',
-                              keyboardType: TextInputType.number,
-                              onSave: (newValue) {
-                                _updateProfile(PatientModel(age: newValue));
-                              },
-                              context: context,
-                            );
-                          },
-                        ),
-                        HeightBox(16),
-                        EditItem(
-                          title: 'كلمة المرور',
-                          value: '********',
-                          onTap: () {
-                            editPasswordDialog(
-                              onTap: () {
-                                context.read<ChangePassCubit>().changePassword(
-                                  oldPassword: passController.text,
-                                  newPassword: newPassController.text,
-                                );
-                                Navigator.pop(context);
-                                context.read<ProfileCubit>().getProfile();
-                              },
-                              context: context,
-                              formKey: formKey,
-                              oldPasswordController: passController,
-                              newPasswordController: newPassController,
-                            );
-                          },
-                        ),
                       ],
                     ),
                   ),
@@ -180,8 +148,6 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                 HeightBox(32),
               ],
             );
-          } else if (state is ProfileError) {
-            return Center(child: Text(state.message));
           } else {
             return const LoadingEditProfile();
           }

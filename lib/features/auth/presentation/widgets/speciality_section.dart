@@ -25,7 +25,10 @@ class SpecialitySection extends StatelessWidget {
             isExpanded: true,
             iconEnabledColor: AppColors.primary,
             underline: const SizedBox(),
-            hint: Text('اختر التخصص', style: AppStyles.textRegular16),
+            hint: Text(
+              'اختر التخصص',
+              style: AppStyles.textRegular16.copyWith(color: AppColors.dark),
+            ),
             icon: const Icon(Icons.expand_circle_down_outlined),
             value: value,
             onChanged: speciality,
@@ -33,7 +36,12 @@ class SpecialitySection extends StatelessWidget {
               for (var specialization in specializations)
                 DropdownMenuItem(
                   value: specialization,
-                  child: Text(specialization, style: AppStyles.textRegular16),
+                  child: Text(
+                    specialization,
+                    style: AppStyles.textRegular16.copyWith(
+                      color: AppColors.dark,
+                    ),
+                  ),
                 ),
             ],
           ),

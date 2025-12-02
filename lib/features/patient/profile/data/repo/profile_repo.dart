@@ -7,6 +7,9 @@ abstract class ProfileRepo {
   Future<Either<String, PatientModel>> updateProfile({
     required PatientModel patient,
   });
-  Future<Either<String, void>> changePassword({required String newPassword});
+  Future<Either<String, void>> changePassword({
+    required String oldPassword,
+    required String newPassword,
+  });
   Future<Either<String, PatientModel>> uploadImage({required File image});
 }

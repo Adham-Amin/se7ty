@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:se7ty/features/auth/data/model/doctor_model.dart';
 import 'package:se7ty/features/doctor/profile/data/repo/doc_profile_repo.dart';
-import 'package:se7ty/features/patient/appointments/data/model/appointments_model.dart';
 
 part 'doc_profile_state.dart';
 
@@ -46,15 +45,6 @@ class DocProfileCubit extends Cubit<DocProfileState> {
     result.fold(
       (l) => emit(DocProfileError(message: l)),
       (r) => emit(DocProfileChangePassword()),
-    );
-  }
-
-  Future<void> getAppointments() async {
-    emit(DocProfileLoading());
-    final result = await docProfileRepo.getAppointments();
-    result.fold(
-      (l) => emit(DocProfileError(message: l)),
-      (r) => emit(DocProfileAppointments(appointments: r)),
     );
   }
 }

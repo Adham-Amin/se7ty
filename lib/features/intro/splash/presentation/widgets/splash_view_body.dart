@@ -27,7 +27,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
       if (role == 'patient') {
         Navigator.pushReplacementNamed(context, AppRoutes.patientMainView);
       } else {
-        Navigator.pushReplacementNamed(context, AppRoutes.onbordingView);
+        Navigator.pushReplacementNamed(context, AppRoutes.docProfileView);
       }
       return;
     }

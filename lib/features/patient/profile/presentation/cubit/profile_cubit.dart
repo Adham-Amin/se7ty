@@ -36,13 +36,4 @@ class ProfileCubit extends Cubit<ProfileState> {
       (r) => emit(ProfileLoaded(patient: r)),
     );
   }
-
-  Future<void> changePassword({required String newPassword}) async {
-    emit(ProfileLoading());
-    final result = await profileRepo.changePassword(newPassword: newPassword);
-    result.fold(
-      (l) => emit(ProfileError(message: l)),
-      (r) => emit(ProfileChangePassword()),
-    );
-  }
 }

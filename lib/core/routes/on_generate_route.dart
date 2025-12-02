@@ -5,6 +5,9 @@ import 'package:se7ty/features/auth/data/model/doctor_model.dart';
 import 'package:se7ty/features/auth/presentation/views/doctor_registeration_view.dart';
 import 'package:se7ty/features/auth/presentation/views/login_view.dart';
 import 'package:se7ty/features/auth/presentation/views/register_view.dart';
+import 'package:se7ty/features/doctor/profile/presentation/manager/doc_profile_cubit/doc_profile_cubit.dart';
+import 'package:se7ty/features/doctor/profile/presentation/views/doc_profile_view.dart';
+import 'package:se7ty/features/doctor/profile/presentation/views/edit_doc_profile_view.dart';
 import 'package:se7ty/features/intro/onbording/presentation/views/onbording_view.dart';
 import 'package:se7ty/features/intro/splash/presentation/views/splash_view.dart';
 import 'package:se7ty/features/intro/welcome/data/model/user_type_enum.dart';
@@ -25,7 +28,9 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case AppRoutes.welcomeView:
       return MaterialPageRoute(builder: (_) => const WelcomeView());
     case AppRoutes.loginView:
-      return MaterialPageRoute(builder: (_) => LoginView());
+      return MaterialPageRoute(
+        builder: (_) => LoginView(userType: settings.arguments as UserTypeEnum),
+      );
     case AppRoutes.registerView:
       return MaterialPageRoute(
         builder: (_) =>
@@ -33,6 +38,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       );
     case AppRoutes.doctorRegisterView:
       return MaterialPageRoute(builder: (_) => const DoctorRegisterView());
+    case AppRoutes.docProfileView:
+      return MaterialPageRoute(builder: (_) => const DocProfileView());
     case AppRoutes.patientMainView:
       return MaterialPageRoute(
         builder: (_) => PatientMainView(key: PatientMainView.mainViewKey),
@@ -57,6 +64,12 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (_) =>
             BlocProvider.value(value: cubit, child: EditProfileView()),
+      );
+    case AppRoutes.editDocProfileView:
+      final cubit = settings.arguments as DocProfileCubit;
+      return MaterialPageRoute(
+        builder: (_) =>
+            BlocProvider.value(value: cubit, child: EditDocProfileView()),
       );
     default:
       return MaterialPageRoute(builder: (_) => const WelcomeView());
