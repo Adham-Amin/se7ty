@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:se7ty/features/auth/data/model/doctor_model.dart';
 import 'package:se7ty/features/auth/data/model/patient_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,9 +19,18 @@ class Prefs {
     return user != null ? PatientModel.fromJson(jsonDecode(user)) : null;
   }
 
+  static Future<void> setDoctor(DoctorModel doctor) async {
+    await _prefs?.setString('admin', jsonEncode(doctor.toJson()));
+  }
+
+  static DoctorModel? getDoctor() {
+    final user = _prefs?.getString('admin');
+    return user != null ? DoctorModel.fromJson(jsonDecode(user)) : null;
+  }
+
   static Future<void> clearUserData() async {
     await _prefs?.remove('user');
-    await clearToken();
+    await _prefs?.remove('admin');
   }
 
   static bool getBool(String key, {bool defaultValue = false}) {
@@ -30,20 +39,5 @@ class Prefs {
 
   static Future<void> setBool(String key, bool value) async {
     await _prefs?.setBool(key, value);
-  }
-
-  static Future<void> setToken(String token) async {
-    var storge = FlutterSecureStorage();
-    await storge.write(key: 'token', value: token);
-  }
-
-  static Future<String?> getToken() async {
-    var storge = FlutterSecureStorage();
-    return await storge.read(key: 'token');
-  }
-
-  static Future<void> clearToken() async {
-    var storge = FlutterSecureStorage();
-    await storge.delete(key: 'token');
   }
 }
