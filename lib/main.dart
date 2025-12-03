@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:se7ty/core/cubit/theme_cubit.dart';
 import 'package:se7ty/core/functions/theme_dark.dart';
 import 'package:se7ty/core/functions/theme_light.dart';
 import 'package:se7ty/core/routes/app_routes.dart';
@@ -24,24 +25,31 @@ class Se7ty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) => MaterialApp(
-        locale: const Locale('ar'),
-        supportedLocales: const [Locale('ar')],
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        themeMode: ThemeMode.dark,
-        theme: themeLight(),
-        darkTheme: themeDark(),
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: onGenerateRoute,
-        initialRoute: AppRoutes.splashView,
+    return BlocProvider(
+      create: (context) => ThemeCubit(),
+      child: ScreenUtilInit(
+        designSize: const Size(375, 812),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) => BlocBuilder<ThemeCubit, ThemeMode>(
+          builder: (context, themeMode) {
+            return MaterialApp(
+              locale: const Locale('ar'),
+              supportedLocales: const [Locale('ar')],
+              localizationsDelegates: const [
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+              themeMode: themeMode,
+              theme: themeLight(),
+              darkTheme: themeDark(),
+              debugShowCheckedModeBanner: false,
+              onGenerateRoute: onGenerateRoute,
+              initialRoute: AppRoutes.splashView,
+            );
+          },
+        ),
       ),
     );
   }
