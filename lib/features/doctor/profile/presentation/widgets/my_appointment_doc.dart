@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:se7ty/core/routes/app_routes.dart';
 import 'package:se7ty/core/utils/app_colors.dart';
 import 'package:se7ty/core/utils/app_styles.dart';
 
@@ -8,7 +9,9 @@ class MyAppointmentDoc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, AppRoutes.docAppointmentsView);
+      },
       child: Container(
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(

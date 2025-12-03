@@ -16,4 +16,34 @@ class DocAppointmentsRepoImpl implements DocAppointmentsRepo {
       return Left(e.toString());
     }
   }
+
+  @override
+  Future<Either<String, List<AppointmentModel>>> acceptAppointment({
+    required String appointmentId,
+  }) async {
+    try {
+      await docAppointmentsDataSource.acceptAppointment(
+        appointmentId: appointmentId,
+      );
+      var appointments = await docAppointmentsDataSource.getDocAppointments();
+      return Right(appointments);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, List<AppointmentModel>>> deleteAppointment({
+    required String appointmentId,
+  }) async {
+    try {
+      await docAppointmentsDataSource.deleteAppointment(
+        appointmentId: appointmentId,
+      );
+      var appointments = await docAppointmentsDataSource.getDocAppointments();
+      return Right(appointments);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 }

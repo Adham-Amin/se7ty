@@ -5,6 +5,7 @@ import 'package:se7ty/features/auth/data/model/doctor_model.dart';
 import 'package:se7ty/features/auth/presentation/views/doctor_registeration_view.dart';
 import 'package:se7ty/features/auth/presentation/views/login_view.dart';
 import 'package:se7ty/features/auth/presentation/views/register_view.dart';
+import 'package:se7ty/features/doctor/doc_appointments/presentation/views/doc_appointments_view.dart';
 import 'package:se7ty/features/doctor/profile/presentation/manager/doc_profile_cubit/doc_profile_cubit.dart';
 import 'package:se7ty/features/doctor/profile/presentation/views/doc_profile_view.dart';
 import 'package:se7ty/features/doctor/profile/presentation/views/edit_doc_profile_view.dart';
@@ -71,6 +72,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
         builder: (_) =>
             BlocProvider.value(value: cubit, child: EditDocProfileView()),
       );
+    case AppRoutes.docAppointmentsView:
+      return MaterialPageRoute(builder: (_) => DocAppointmentsView());
     default:
       return MaterialPageRoute(builder: (_) => const WelcomeView());
   }

@@ -3,6 +3,8 @@ import 'package:se7ty/features/patient/appointments/data/model/appointments_mode
 
 abstract class DocAppointmentsDataSource {
   Future<List<AppointmentModel>> getDocAppointments();
+  Future<void> acceptAppointment({required String appointmentId});
+  Future<void> deleteAppointment({required String appointmentId});
 }
 
 class DocAppointmentsDataSourceImpl extends DocAppointmentsDataSource {
@@ -22,5 +24,21 @@ class DocAppointmentsDataSourceImpl extends DocAppointmentsDataSource {
     }
 
     return appointments;
+  }
+
+  @override
+  Future<void> acceptAppointment({required String appointmentId}) async {
+    await firebaseService.firestore
+        .collection('appointments')
+        .doc(appointmentId)
+        .update({'isComplete': true});
+  }
+
+  @override
+  Future<void> deleteAppointment({required String appointmentId}) {
+    return firebaseService.firestore
+        .collection('appointments')
+        .doc(appointmentId)
+        .delete();
   }
 }

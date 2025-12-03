@@ -18,4 +18,26 @@ class DocAppointmentsCubit extends Cubit<DocAppointmentsState> {
       (r) => emit(DocAppointmentsLoaded(appointments: r)),
     );
   }
+
+  Future<void> acceptAppointment({required String appointmentId}) async {
+    emit(DocAppointmentsLoading());
+    var result = await docAppointmentsRepo.acceptAppointment(
+      appointmentId: appointmentId,
+    );
+    result.fold(
+      (l) => emit(DocAppointmentsError(message: l)),
+      (r) => emit(DocAppointmentsLoaded(appointments: r)),
+    );
+  }
+
+  Future<void> deleteAppointment({required String appointmentId}) async {
+    emit(DocAppointmentsLoading());
+    var result = await docAppointmentsRepo.deleteAppointment(
+      appointmentId: appointmentId,
+    );
+    result.fold(
+      (l) => emit(DocAppointmentsError(message: l)),
+      (r) => emit(DocAppointmentsLoaded(appointments: r)),
+    );
+  }
 }

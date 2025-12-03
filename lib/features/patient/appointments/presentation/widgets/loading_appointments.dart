@@ -5,13 +5,18 @@ import 'package:se7ty/features/patient/appointments/presentation/widgets/appoint
 import 'package:skeletonizer/skeletonizer.dart';
 
 class LoadingAppointments extends StatelessWidget {
-  const LoadingAppointments({super.key});
+  const LoadingAppointments({super.key, this.space});
+
+  final bool? space;
 
   @override
   Widget build(BuildContext context) {
     return Skeletonizer(
       enabled: true,
       child: ListView.separated(
+        padding: space == true
+            ? const EdgeInsets.only(top: 24)
+            : const EdgeInsets.all(0),
         itemCount: 3,
         physics: BouncingScrollPhysics(),
         separatorBuilder: (context, index) => HeightBox(12),
