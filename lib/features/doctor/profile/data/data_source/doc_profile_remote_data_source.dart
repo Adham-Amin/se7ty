@@ -1,15 +1,17 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:se7ty/core/functions/image_uploader.dart';
 import 'package:se7ty/core/services/firebase_service.dart';
 import 'package:se7ty/features/auth/data/model/doctor_model.dart';
-import 'package:se7ty/features/patient/appointments/data/model/appointments_model.dart';
 
 abstract class DocProfileRemoteDataSource {
   Future<DoctorModel> getUserData();
   Future<void> uploadImage({required File image});
   Future<void> updateUserData({required DoctorModel doctor});
-  Future<void> changePassword({required String newPassword});
-  Future<List<AppointmentModel>> getAppointments();
+  Future<void> changePassword({
+    required String oldPassword,
+    required String newPassword,
+  });
 }
 
 class DocProfileRemoteDataSourceImpl implements DocProfileRemoteDataSource {
@@ -17,8 +19,18 @@ class DocProfileRemoteDataSourceImpl implements DocProfileRemoteDataSource {
   DocProfileRemoteDataSourceImpl({required this.firebaseService});
 
   @override
-  Future<void> changePassword({required String newPassword}) async {
-    await firebaseService.auth.currentUser!.updatePassword(newPassword);
+  Future<void> changePassword({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    final user = firebaseService.auth.currentUser;
+    final cred = EmailAuthProvider.credential(
+      email: user!.email!,
+      password: oldPassword,
+    );
+
+    await user.reauthenticateWithCredential(cred);
+    await user.updatePassword(newPassword);
   }
 
   @override
@@ -45,20 +57,5 @@ class DocProfileRemoteDataSourceImpl implements DocProfileRemoteDataSource {
         .collection('doctors')
         .doc(firebaseService.auth.currentUser!.uid)
         .update(DoctorModel(image: imageUrl).toUpdateData());
-  }
-
-  @override
-  Future<List<AppointmentModel>> getAppointments() async {
-    var snapshot = await firebaseService.firestore
-        .collection('appointments')
-        .where('doctorID', isEqualTo: firebaseService.auth.currentUser!.uid)
-        .get();
-
-    List<AppointmentModel> appointments = [];
-    for (var doc in snapshot.docs) {
-      appointments.add(AppointmentModel.fromJson(doc.data(), doc.id));
-    }
-
-    return appointments;
   }
 }

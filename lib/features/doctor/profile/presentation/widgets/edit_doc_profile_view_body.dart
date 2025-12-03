@@ -8,6 +8,7 @@ import 'package:se7ty/core/utils/app_colors.dart';
 import 'package:se7ty/core/widgets/custom_button.dart';
 import 'package:se7ty/core/widgets/height_and_width.dart';
 import 'package:se7ty/features/auth/data/model/doctor_model.dart';
+import 'package:se7ty/features/doctor/profile/presentation/manager/cubit/doc_change_pass_cubit.dart';
 import 'package:se7ty/features/doctor/profile/presentation/manager/doc_profile_cubit/doc_profile_cubit.dart';
 import 'package:se7ty/features/patient/profile/presentation/widgets/edit_item.dart';
 import 'package:se7ty/features/patient/profile/presentation/widgets/loading_edit_profile.dart';
@@ -23,10 +24,22 @@ class EditDocProfileViewBody extends StatefulWidget {
 class _EditDocProfileViewBodyState extends State<EditDocProfileViewBody> {
   late DoctorModel doctor;
 
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  late TextEditingController oldPassController, newPassController;
+
   @override
   void initState() {
     super.initState();
     doctor = Prefs.getDoctor()!;
+    oldPassController = TextEditingController();
+    newPassController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    oldPassController.dispose();
+    newPassController.dispose();
+    super.dispose();
   }
 
   void _updateProfile(DoctorModel newData) {
@@ -126,6 +139,28 @@ class _EditDocProfileViewBodyState extends State<EditDocProfileViewBody> {
                           },
                         ),
                         HeightBox(16),
+                        EditItem(
+                          title: 'كلمة المرور',
+                          value: '********',
+                          onTap: () {
+                            editPasswordDialog(
+                              onTap: () {
+                                context
+                                    .read<DocChangePassCubit>()
+                                    .changePassword(
+                                      oldPassword: oldPassController.text,
+                                      newPassword: newPassController.text,
+                                    );
+                                Navigator.pop(context);
+                                context.read<DocProfileCubit>().getProfile();
+                              },
+                              context: context,
+                              formKey: formKey,
+                              oldPasswordController: oldPassController,
+                              newPasswordController: newPassController,
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ),

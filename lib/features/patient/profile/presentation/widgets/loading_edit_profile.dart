@@ -36,6 +36,8 @@ class LoadingEditProfile extends StatelessWidget {
                   ),
                   HeightBox(16),
                   const EditItem(title: 'العمر', value: '---', onTap: null),
+                  HeightBox(16),
+                  const EditItem(title: 'العمر', value: '---', onTap: null),
                 ],
               ),
             ),

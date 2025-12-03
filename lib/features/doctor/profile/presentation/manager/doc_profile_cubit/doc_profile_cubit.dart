@@ -36,15 +36,4 @@ class DocProfileCubit extends Cubit<DocProfileState> {
       (r) => emit(DocProfileLoaded(doctor: r)),
     );
   }
-
-  Future<void> changePassword({required String newPassword}) async {
-    emit(DocProfileLoading());
-    final result = await docProfileRepo.changePassword(
-      newPassword: newPassword,
-    );
-    result.fold(
-      (l) => emit(DocProfileError(message: l)),
-      (r) => emit(DocProfileChangePassword()),
-    );
-  }
 }

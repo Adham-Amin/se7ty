@@ -1,17 +1,18 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:se7ty/features/doctor/profile/data/repo/doc_profile_repo.dart';
+import 'package:se7ty/features/doctor/doc_appointments/data/repos/doc_appointments_repo.dart';
 import 'package:se7ty/features/patient/appointments/data/model/appointments_model.dart';
+
 part 'doc_appointments_state.dart';
 
 class DocAppointmentsCubit extends Cubit<DocAppointmentsState> {
-  DocAppointmentsCubit({required this.docProfileRepo})
+  DocAppointmentsCubit({required this.docAppointmentsRepo})
     : super(DocAppointmentsInitial());
 
-  final DocProfileRepo docProfileRepo;
+  final DocAppointmentsRepo docAppointmentsRepo;
 
-  Future<void> getAppointments() async {
+  Future<void> getDocAppointments() async {
     emit(DocAppointmentsLoading());
-    final result = await docProfileRepo.getAppointments();
+    var result = await docAppointmentsRepo.getDocAppointments();
     result.fold(
       (l) => emit(DocAppointmentsError(message: l)),
       (r) => emit(DocAppointmentsLoaded(appointments: r)),

@@ -3,7 +3,6 @@ import 'package:se7ty/core/services/shared_preferences_service.dart';
 import 'package:se7ty/features/auth/data/model/doctor_model.dart';
 import 'package:se7ty/features/doctor/profile/data/data_source/doc_profile_remote_data_source.dart';
 import 'package:se7ty/features/doctor/profile/data/repo/doc_profile_repo.dart';
-import 'package:se7ty/features/patient/appointments/data/model/appointments_model.dart';
 
 class DocProfileRepoImpl implements DocProfileRepo {
   final DocProfileRemoteDataSource docProfileRemoteDataSource;
@@ -11,10 +10,14 @@ class DocProfileRepoImpl implements DocProfileRepo {
 
   @override
   Future<Either<String, void>> changePassword({
+    required String oldPassword,
     required String newPassword,
   }) async {
     try {
-      await docProfileRemoteDataSource.changePassword(newPassword: newPassword);
+      await docProfileRemoteDataSource.changePassword(
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+      );
       return right(null);
     } catch (e) {
       return left(e.toString());
@@ -51,16 +54,6 @@ class DocProfileRepoImpl implements DocProfileRepo {
       await docProfileRemoteDataSource.uploadImage(image: image);
       final updatedPatient = await docProfileRemoteDataSource.getUserData();
       return right(updatedPatient);
-    } catch (e) {
-      return left(e.toString());
-    }
-  }
-
-  @override
-  Future<Either<String, List<AppointmentModel>>> getAppointments() async {
-    try {
-      final appointments = await docProfileRemoteDataSource.getAppointments();
-      return right(appointments);
     } catch (e) {
       return left(e.toString());
     }
